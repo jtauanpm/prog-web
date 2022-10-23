@@ -14,53 +14,41 @@
 
     <script type="text/babel">
       const bebidas = [
-        "Aguá",
-        "Cachaça",
-        "Cerveja",
-        "Refrigerante",
-        "Vinho",
-        "Whisky",
-        "Vodka",
+        { name: "Agua" },
+        { name: "Aguá1" },
+        { name: "Aguá2" },
+        { name: "Aguá3" },
+        { name: "Aguá4" },
+        { name: "Aguá5" },
+        { name: "Aguá6" },
       ];
+
       ReactDOM.render(<Body />, document.getElementById("app"));
-      var showTable = false;
-      var showTable = () => {
-        showTable = !showTable;
+
+      var carregarTabela = (array) => {
+        let tabela = document.querySelector("#tabela tbody");
+        const unit = array.map(({ name }) => `<tr><td>${name}</td></tr>`);
+        tabela.innerHTML = `${unit.join("\n")}`;
       };
 
       function Body() {
-        return (
-          <div id="app">
+        return <div id="app">
             <Cabecalho />
-            <button onClick={showTable()}>Mostrar Tabela</button>
-            <TabelaBebidas/>
+            <button onClick={carregarTabela(bebidas)}>Mostrar Tabela</button>
+            <TabelaBebidas />
           </div>
-        );
       }
 
       function TabelaBebidas() {
-        if (showTable) {
-          var bebidas = document.getElementById(bebidas);
-          bebidas.innerHTML(
-            <table id="tabela" border="1">
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                </tr>
-              </thead>
+        return <table id="tabela" border="1">
+          <thead>
+            <tr>
+              <th>Nome</th>
+            </tr>
+          </thead>
 
-              <tbody>
-                {bebidas.map((bebida) => {
-                  return (
-                    <tr>
-                      <td>{bebida}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          );
-        }
+          <tbody></tbody>
+        </table>
       }
 
       const Cabecalho = () => <h1>Minha tabela de bebidas</h1>;
