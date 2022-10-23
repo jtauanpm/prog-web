@@ -13,27 +13,57 @@
     <script src="../libs/babel.js"></script>
 
     <script type="text/babel">
-      ReactDOM.render(
-        <div id="app">
-          <table id="tabela" border="1">
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Marca</th>
-              </tr>
-            </thead>
+      const bebidas = [
+        "Aguá",
+        "Cachaça",
+        "Cerveja",
+        "Refrigerante",
+        "Vinho",
+        "Whisky",
+        "Vodka",
+      ];
+      ReactDOM.render(<Body />, document.getElementById("app"));
+      var showTable = false;
+      var showTable = () => {
+        showTable = !showTable;
+      };
 
-            <tbody>
-              <tr>
-                <td>Havana</td>
-                <td>Engenho Anísio Santiago</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>,
+      function Body() {
+        return (
+          <div id="app">
+            <Cabecalho />
+            <button onClick={showTable()}>Mostrar Tabela</button>
+            <TabelaBebidas/>
+          </div>
+        );
+      }
 
-        document.getElementById("app")
-      );
+      function TabelaBebidas() {
+        if (showTable) {
+          var bebidas = document.getElementById(bebidas);
+          bebidas.innerHTML(
+            <table id="tabela" border="1">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {bebidas.map((bebida) => {
+                  return (
+                    <tr>
+                      <td>{bebida}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          );
+        }
+      }
+
+      const Cabecalho = () => <h1>Minha tabela de bebidas</h1>;
     </script>
   </body>
 </html>
